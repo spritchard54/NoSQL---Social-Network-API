@@ -1,4 +1,4 @@
-const { Schema, default: mongoose } = require('mongoose');
+const mongoose = require('mongoose');
 
 // The reactionSchema defines the schema of the subdocument
 const reactionSchema = new mongoose.Schema({
