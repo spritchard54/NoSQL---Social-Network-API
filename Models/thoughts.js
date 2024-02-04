@@ -9,10 +9,7 @@ const reactionSchema = new mongoose.Schema({
     //   * Use a getter method to format the timestamp on query (this could be a virtual)
 },
     {
-        toJSON: {
-            getters: true,
-        },
-        id: false,
+        toJSON: { getters: true, },id: false,
     });
 
 const thoughtsSchema = new Schema(
@@ -45,6 +42,15 @@ Thoughts
     .then(data => console.log(data))
     .catch(err => console.log(err));
 
+// Create a virtual called `reactionCount` that retrieves the length of the thought's `reactions` array field on query.
+reactionSchema
+  .virtual('reactionCount')
+  // Getter
+  .get(function () {
+    return `"UPDATE"`;
+  })
+
+// const Thoughts = model('thoughts', thoughtsSchema);
+
 module.exports = Thoughts;
 
-// Create a virtual called `reactionCount` that retrieves the length of the thought's `reactions` array field on query.
