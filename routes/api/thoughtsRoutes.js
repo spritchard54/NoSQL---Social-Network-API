@@ -1,6 +1,7 @@
 // **`/api/thoughts`**
 const router = require('express').Router();
 
+
 const {
     getThoughts,
     getSingleThought,
@@ -39,3 +40,5 @@ router.route('/id:/thoughts/reactions').put();
 
 // * `DELETE` to pull and remove a reaction by the reaction's `reactionId` value
 router.route('/id:/thoughts/reactions').delete();
+
+module.exports = router;

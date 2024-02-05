@@ -13,10 +13,10 @@ const usersSchema = new mongoose.Schema({
 
     // * `thoughts`
     //   * Array of `_id` values referencing the `Thought` model
-    thoughts: [ thoughtsSchema ],
+    thoughts: [ {type: mongoose.Schema.Types.ObjectId, ref: 'Thoughts'} ],
     // * `friends`
     //   * Array of `_id` values referencing the `User` model (self-reference)
-    friends: [ usersSchema ],
+    friends: [ {type: mongoose.Schema.Types.ObjectId, ref: 'Users'} ],
 }, {
     toJSON: { getters: true },
 }
@@ -32,6 +32,6 @@ usersSchema
   })
 
 
-const Users = model('users', usersSchema);
+const Users = mongoose.model('users', usersSchema);
 
 module.exports = Users;

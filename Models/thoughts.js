@@ -1,15 +1,16 @@
 const mongoose = require('mongoose');
+const {Schema, Types} = require('mongoose');
 
 // The reactionSchema defines the schema of the subdocument
-const reactionSchema = new mongoose.Schema({
-    reactionId: { type: Schema.Types.ObjectId, default: () => new Types.ObjectId() },
-    reactionBody: { type: String, required: true, maxlength: 280, minlength: 4, },
-    username: { type: String, required: true },
-    createdAt: { type: Date, default: Date.now },
+const reactionSchema = new Schema({
+    reactionId:  { type: Schema.Types.ObjectId, default: () => new Types.ObjectId() },
+    reactionBody:{ type: String, required: true, maxlength: 280, minlength: 4, },
+    username:    { type: String, required: true },
+    createdAt:   { type: Date, default: Date.now },
     //   * Use a getter method to format the timestamp on query (this could be a virtual)
 },
     {
-        toJSON: { getters: true, },id: false,
+        toJSON: { getters: true, }, id: false,
     });
 
 const thoughtsSchema = new Schema(
@@ -44,13 +45,11 @@ Thoughts
 
 // Create a virtual called `reactionCount` that retrieves the length of the thought's `reactions` array field on query.
 reactionSchema
-  .virtual('reactionCount')
-  // Getter
-  .get(function () {
-    return `"UPDATE"`;
-  })
-
-// const Thoughts = model('thoughts', thoughtsSchema);
+    .virtual('reactionCount')
+    // Getter
+    .get(function () {
+        return `"UPDATE"`;
+    })
 
 module.exports = Thoughts;
 
