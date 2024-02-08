@@ -15,10 +15,10 @@ router.route("/").get(getThoughts).post(createThought);
 
 // * `GET` to get a single thought by its `_id`
 // * `DELETE` to remove a thought by its `_id`
-router.route('/:id').get(getSingleThought).delete(deleteThought);
+router.route('/:thoughtId').get(getSingleThought).delete(deleteThought);
 
 // * `PUT` to update a thought by its `_id`
-router.route('/:id').put(updateThought);
+router.route('/:thoughtId').put(updateThought);
 
 // ---
 
