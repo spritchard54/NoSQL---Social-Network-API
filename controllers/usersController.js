@@ -1,4 +1,3 @@
-// const { ObjectId } = require('mongoose').Types;
 const { Thought, User } = require("../models");
 
 module.exports = {
@@ -54,7 +53,8 @@ module.exports = {
         });
       }
 
-      res.json({ message: "users and thoughts deleted!" });
+    
+      res.json({ message: "user and thoughts deleted!" });
     } catch (err) {
       console.log(err);
       res.status(500).json(err);
