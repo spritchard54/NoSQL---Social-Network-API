@@ -8,7 +8,6 @@ module.exports = {
       res.json(thoughts);
     } catch (err) {
       res.status(500).json(err);
-      console.log(err);
     }
   },
   // Get a thought
@@ -26,9 +25,6 @@ module.exports = {
   // Add a thought to a user
   async createThought(req, res) {
     try {
-      console.log("You are adding a thought");
-      console.log(req.body);
-
       const thought = await Thought.create(req.body);
 
       const user = await User.findByIdAndUpdate(
@@ -54,7 +50,6 @@ module.exports = {
 
       res.json(user);
     } catch (err) {
-      console.log(err);
       res.status(500).json(err);
     }
   },
@@ -65,8 +60,6 @@ module.exports = {
         _id: req.params.thoughtId,
       });
 
-      console.log(req.params.thoughtId);
-
       if (!thought) {
         return res
           .status(404)
@@ -74,7 +67,6 @@ module.exports = {
       }
       res.json({ message: "Thought deleted" });
     } catch (err) {
-      console.log(err);
       res.status(500).json(err);
     }
   },
@@ -124,7 +116,6 @@ module.exports = {
         res.status(200).json(reaction);
       }
     } catch (err) {
-      console.log(err);
       res.status(500).json(err.toString());
     }
   },
@@ -150,7 +141,6 @@ module.exports = {
         res.status(200).json(reaction);
       }
     } catch (err) {
-      console.log(err);
       res.status(500).json(err.toString());
     }
   },

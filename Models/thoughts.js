@@ -1,9 +1,11 @@
+const dayjs = require("dayjs");
 const mongoose = require("mongoose");
 const { Schema, Types } = require("mongoose");
 
-dateFormat = function(todaysDate) {
-  return todaysDate.getMonth();
-};
+var advancedFormat = require('dayjs/plugin/advancedFormat')
+dayjs.extend(advancedFormat)
+
+dayjs().format('Q Do k kk X x')
 
 // The reactionSchema defines the schema of the subdocument
 const reactionSchema = new Schema(
@@ -26,7 +28,7 @@ const reactionSchema = new Schema(
     createdAt: {
       type: Date,
       default: Date.now,
-      get: (today) => dateFormat(today),
+      get: (today) => dayjs(today).format('MMM Do, YYYY [at] h:mma'),
     },
   },
   {
@@ -49,7 +51,8 @@ const thoughtsSchema = new Schema(
       type: Date,
       required: true,
       default: Date.now,
-      get: (today) => dateFormat(today),
+      // get: (today) => dateFormat(today),
+      get: (today) => dayjs(today).format('MMM Do, YYYY [at] h:mma'),
     },
     // Use a getter method to format the timestamp on query
 

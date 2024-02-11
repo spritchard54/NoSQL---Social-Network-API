@@ -24,16 +24,25 @@ const usersSchema = new mongoose.Schema(
       // Must match a valid email address (look into Mongoose's matching validation)
       validate: [validateEmail, "Please fill a valid email address"],
     },
-
-    // * `thoughts`
     //   * Array of `_id` values referencing the `Thought` model
-    thoughts: [{ type: mongoose.Schema.Types.ObjectId, ref: "Thought" }],
-    // * `friends`
+    thoughts: [
+      { 
+        type: mongoose.Schema.Types.ObjectId, 
+        ref: "Thought" 
+      }
+    ],
     //   * Array of `_id` values referencing the `User` model (self-reference)
-    friends: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
+    friends: [
+      { 
+        type: mongoose.Schema.Types.ObjectId, 
+        ref: "User" 
+      }
+    ],
   },
   {
-    toJSON: { getters: true },
+    toJSON: { 
+      getters: true 
+    },
   }
 );
 

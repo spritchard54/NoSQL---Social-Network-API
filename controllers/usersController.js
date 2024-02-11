@@ -28,23 +28,34 @@ module.exports = {
       const users = await User.create(req.body);
       res.json(users);
     } catch (err) {
-      console.log(err);
       return res.status(500).json(err);
     }
   },
   // Delete a user
   async deleteUser(req, res) {
     try {
-      const users = await User.findByIdAndDelete({ _id: req.params.id });
+      const users = await User.findByIdAndDelete({
+        _id: req.params.id,
+      });
 
       if (!users) {
-        res.status(404).json({ message: "No users with that ID" });
+        res.status(404).json({
+          message: "No users with that ID",
+        });
       }
 
-      const thoughts = await Thought.findOneAndUpdate(
-        { users: req.params.usersID },
-        { $pull: { users: req.params.usersID } },
-        { new: true }
+      const thoughts = await Thought.updateMany(
+        {
+          users: req.params.usersId,
+        },
+        {
+          $pull: {
+            users: req.params.usersId,
+          },
+        },
+        {
+          new: true,
+        }
       );
 
       if (!thoughts) {
@@ -53,10 +64,9 @@ module.exports = {
         });
       }
 
-    
       res.json({ message: "user and thoughts deleted!" });
     } catch (err) {
-      console.log(err);
+      // console.log(err);
       res.status(500).json(err);
     }
   },
@@ -82,7 +92,7 @@ module.exports = {
   async addFriend(req, res) {
     try {
       // console.log(`You are adding a friend.`);
-      console.log(req.params);
+      // console.log(req.params);
 
       const user = await User.findOneAndUpdate(
         //changed from findOneAndUpdate
@@ -106,7 +116,6 @@ module.exports = {
 
       res.json(user);
     } catch (err) {
-      // console.log(err);
       res.status(500).json(err);
     }
   },
